@@ -1,0 +1,32 @@
+{% extends 'dashboard/base.html' %} 
+{% load crispy_forms_tags %}
+{% block title %} Medicals Form {% endblock %}
+{% load static %}
+{% block content %}
+<div class="content-body">
+  <form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+      <div class="col md 6">{{mform.analysis_name|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.abbr|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.description|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.technique|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.unit|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.interval|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.regular_price|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.assured_price|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.debit|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.collectors|as_crispy_field}}</div>
+      <div class="col md 6">{{mform.bench|as_crispy_field}}</div>
+    <div class="row">
+      <div class="col md 6">
+        <button class="btn btn-success my-4" type="submit"> <i class="fas fa-database"> </i> Submit</button>
+      </div>
+      <div class="col md 6">
+        <a href="{% url 'medicals_list' %}" class="btn btn-secondary btn-block">Back To List
+          <i class="fas fa-stream"></i>
+        </a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'dashboard/base.html' %} 
+{% load crispy_forms_tags %}
+{% block title %} Analysis Form {% endblock %}
+{% load static %}
+{% block content %}
+<div class="content-body">
+  <form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+      <div class="col md 6">{{form.additives|as_crispy_field}}</div>
+      <div class="col md 6">{{form.collectors|as_crispy_field}}</div>
+      <div class="col md 6">{{form.measurement|as_crispy_field}}</div>
+      <div class="col md 6">{{form.interval|as_crispy_field}}</div>
+      <div class="col md 6">{{form.technique|as_crispy_field}}</div>
+      <div class="col md 6">{{form.observation|as_crispy_field}}</div>
+      <div class="col md 6">{{form.paillaise_noms|as_crispy_field}}</div>
+    <div class="row">
+      <div class="col md 6">
+        <button class="btn btn-success my-4" type="submit"> <i class="fas fa-database"> </i> Submit</button>
+      </div>
+      <div class="col md 6">
+        <a href="{% url 'analysis_list' %}" class="btn btn-secondary btn-block">Back To List
+          <i class="fas fa-stream"></i>
+        </a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
