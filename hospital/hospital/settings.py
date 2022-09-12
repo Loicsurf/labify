@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
+import django_heroku
 
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary',
@@ -35,7 +36,7 @@ SECRET_KEY = 'django-insecure-ie=o$=0&nnl62ja*8^+6*lxe3dh5*n2mvkpe#&d4_9p51v9e$=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["labify-production.up.railway.app", "labisfy.com"]
+ALLOWED_HOSTS = ["labify-production.up.railway.app", "labisfy.com", 'labify.herokuapp.com']
 
 
 # Application definition
@@ -65,9 +66,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'mylab.middlewares.AjaxMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'hospital.urls'
+django_heroku.settings(locals())
 
 TEMPLATES = [
     {
@@ -101,6 +104,10 @@ DATABASES = {
         'PORT': '5555',
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -136,6 +143,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
