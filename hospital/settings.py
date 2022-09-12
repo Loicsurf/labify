@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from email.policy import default
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import django_heroku
+from decouple import config
 
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary',
@@ -31,11 +33,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
-    SECRET_KEY = f.read().strip()
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG', cast=bool, default=False)
 
 ALLOWED_HOSTS = ["labify-production.up.railway.app", "labisfy.com", 'labify.herokuapp.com']
 CSRF_TRUSTED_ORIGINS = ['https://labify-production.up.railway.app']
