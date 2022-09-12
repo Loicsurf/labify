@@ -37,6 +37,7 @@ SECRET_KEY = 'django-insecure-ie=o$=0&nnl62ja*8^+6*lxe3dh5*n2mvkpe#&d4_9p51v9e$=
 DEBUG = True
 
 ALLOWED_HOSTS = ["labify-production.up.railway.app", "labisfy.com", 'labify.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['labify-production.up.railway.app']
 
 
 # Application definition
