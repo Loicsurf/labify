@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-ie=o$=0&nnl62ja*8^+6*lxe3dh5*n2mvkpe#&d4_9p51v9e$=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://labify-production.up.railway.app/"]
+ALLOWED_HOSTS = ["labify-production.up.railway.app", "labisfy.com"]
 
 
 # Application definition
