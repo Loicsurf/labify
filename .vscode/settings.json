@@ -6,6 +6,7 @@
     "labisfy",
     "middlewares",
     "mylab",
+    "psycopg",
     "whitenoise",
     "wsgi"
   ]
