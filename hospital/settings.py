@@ -39,7 +39,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = ["labify-production.up.railway.app", "labisfy.com", 'labify.herokuapp.com']
+ALLOWED_HOSTS = ["labify-production.up.railway.app", "labisfy.com", 'labify.herokuapp.com', '0.0.0.0', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['https://labify-production.up.railway.app']
 
 
