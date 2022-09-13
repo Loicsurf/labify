@@ -1,3 +1,12 @@
 {
-  "cSpell.words": ["gunicorn", "labisfy", "wsgi"]
+  "cSpell.words": [
+    "gunicorn",
+    "herokuapp",
+    "labify",
+    "labisfy",
+    "middlewares",
+    "mylab",
+    "whitenoise",
+    "wsgi"
+  ]
 }
