@@ -1,7 +1,7 @@
 from .base import *
 from decouple import config
 
-SECRET_KEY = 'django-insecure-ie=o$=0&nnl62ja*8^+6*lxe3dh5*n2mvkpe#&d4_9p51v9e$='
+SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 

@@ -15,7 +15,6 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import django_heroku
-from decouple import config
 
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary',
@@ -135,3 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/login'
+
+if os.environ.get('DJANGO_DEVELOPMENT'):
+    from dev import *  # or specific overrides
