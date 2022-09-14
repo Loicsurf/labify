@@ -5,8 +5,8 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["labify-production.up.railway.app", "labisfy.com", 'labify.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ['https://labify-production.up.railway.app']
+ALLOWED_HOSTS = ["labisfycom-labisfy.up.railway.app", "labisfy.com", 'labify.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://labisfycom-labisfy.up.railway.app/']
 
 DATABASES = {
     'default': {
