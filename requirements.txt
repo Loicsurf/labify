@@ -9,3 +9,4 @@ pip==22.2.2
 django-crispy-forms==1.14.0
 crispy-bootstrap5==0.6
 django-widget-tweaks==1.4.12
+python-decouple==3.6

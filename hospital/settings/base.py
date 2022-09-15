@@ -24,20 +24,12 @@ MESSAGE_TAGS = {
 }
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+# Installed python decouple in venv
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ie=o$=0&nnl62ja*8^+6*lxe3dh5*n2mvkpe#&d4_9p51v9e$='
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["labify-production.up.railway.app", "labisfy.com", 'labify.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ['https://labify-production.up.railway.app/']
 
 
 # Application definition
@@ -92,24 +84,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'hospital.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mylab',
-        'USER': 'loicsurf',
-        'PASSWORD': 'Ciacia144',
-        'HOST': 'localhost',
-        'PORT': '5555',
-    }
-}
-
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -159,3 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/login'
+
+if os.environ.get('DJANGO_DEVELOPMENT'):
+    from dev import *  # or specific overrides
