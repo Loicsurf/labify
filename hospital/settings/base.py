@@ -35,6 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -138,3 +139,11 @@ if os.getcwd() == '/app':
         SECURE_PROXY_SSL_HEADER = ('HTTP-X-FORWARDED-PROTO', 'https')
         SECURE_SSL_REDIRECT = True
         DEBUG = False
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Labisfy Administration",
+    "site_header": "Labisfy",
+    "site_brand": "Labisfy",
+    "copyright": "Labisfy",
+    "search_model": "auth.User",
+}
