@@ -133,3 +133,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/login'
+
+if os.getcwd() == '/app':
+        SECURE_PROXY_SSL_HEADER = ('HTTP-X-FORWARDED-PROTO', 'https')
+        SECURE_SSL_REDIRECT = True
+        DEBUG = False
