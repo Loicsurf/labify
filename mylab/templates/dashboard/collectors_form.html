@@ -4,22 +4,48 @@
 {% load static %}
 {% block content %}
 <div class="content-body">
-  <form action="" method="post" autocomplete="off">
-    {% csrf_token %}
-      <div class="col md 6">{{cform.name|as_crispy_field}}</div>
-      <div class="col md 6">{{cform.color|as_crispy_field}}</div>
-      <div class="col md 6">{{cform.description|as_crispy_field}}</div>
-      <div class="col md 6">{{cform.additives|as_crispy_field}}</div>
-    <div class="row">
-      <div class="col md 6">
-        <button class="btn btn-success my-4" type="submit"> <i class="fas fa-database"> </i> Submit</button>
-      </div>
-      <div class="col md 6">
-        <a href="{% url 'collectors_list' %}" class="btn btn-secondary btn-block">Back To List
-          <i class="fas fa-stream"></i>
-        </a>
-      </div>
+  <div class="container-fluid" style="
+  margin-left: 250px;
+">
+    <div class="page-titles">
+      <h4>Add Patient</h4>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Patient <Form></Form></a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Element</a></li>
+      </ol>
+        </div>
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Input Style</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                          <form action="" method="post" autocomplete="off">
+                            {% csrf_token %}
+                              <div class="col md 6">{{cform.name|as_crispy_field}}</div>
+                              <div class="col md 6">{{cform.color|as_crispy_field}}</div>
+                              <div class="col md 6">{{cform.description|as_crispy_field}}</div>
+                              <div class="col md 6">{{cform.additives|as_crispy_field}}</div>
+                            <div class="row">
+                              <div class="col md 6">
+                                <button class="btn btn-success my-4" type="submit"> <i class="fas fa-database"> </i> Submit</button>
+                              </div>
+                              <div class="col md 6">
+                                <a href="{% url 'collectors_list' %}" class="btn btn-secondary btn-block">Back To List
+                                  <i class="fas fa-stream"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
     </div>
-  </form>
+  </div>
 </div>
 {% endblock %}

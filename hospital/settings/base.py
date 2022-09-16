@@ -35,6 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    'mylab',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,14 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mylab',
     'crispy_forms',
     'crispy_bootstrap5',
     'widget_tweaks',
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
-CRISPY_ALLOWED_PACK = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -134,6 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/login'
+
 
 if os.getcwd() == '/app':
         SECURE_PROXY_SSL_HEADER = ('HTTP-X-FORWARDED-PROTO', 'https')
