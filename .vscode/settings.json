@@ -11,5 +11,8 @@
     "psycopg",
     "whitenoise",
     "wsgi"
-  ]
+  ],
+  "python.testing.unittestArgs": ["-v", "-s", "./hospital", "-p", "*test.py"],
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestEnabled": true
 }
