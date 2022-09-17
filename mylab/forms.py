@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Prescription, Analysis, Interval, Measurement, Collectors, Additives, Technique, Medicals
+from .models import Prescription, Interval, Measurement, Collectors, Additives, Technique, Medicals
 
 
 class RegisterForm(UserCreationForm):
@@ -25,12 +25,6 @@ class PatientsForm(forms.ModelForm):
             'first_name': 'First Name',
             'last_name': 'Last Name'
         }
-
-class AnalysisForm(forms.ModelForm):
-
-    class Meta:
-        model = Analysis
-        fields = '__all__'
 
 
 class CollectorsForm(forms.ModelForm):

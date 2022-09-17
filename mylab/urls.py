@@ -16,13 +16,6 @@ urlpatterns = [
     path('patients_delete/<str:id>/', views.patients_delete, name="patients_delete"),
 ########################## END PRESCRIPTION #####################################################
 
-########################## Analyse #####################################################
-    path('aform', views.analysis_form, name='analysis_form'),
-    path('alist', views.analysis_list, name='analysis_list'),
-    path('update_analysis/<str:id>/', views.analysis_form, name="update_analysis"),
-    path('analysis_delete/<str:id>/', views.analysis_delete, name="analysis_delete"),
-########################## END ANALYSE #####################################################
-
 ########################## Collectors #####################################################
     path('cform', views.collectors_form, name='collectors_form'),
     path('clist', views.collectors_list, name='collectors_list'),

@@ -1,10 +1,10 @@
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import RegisterForm, PatientsForm, AnalysisForm, CollectorsForm, MedicalsForm
+from .forms import RegisterForm, PatientsForm, CollectorsForm, MedicalsForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
-from .models import Prescription, Analysis, Collectors, Medicals, Doctor
+from .models import Prescription, Collectors, Medicals, Doctor
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic.list import ListView
 
@@ -78,36 +78,6 @@ def patients_delete(request, id):
     return redirect('/list')
 
 ########################## END PRESCRIPTION #####################################################
-
-########################## Analyse #####################################################
-def analysis_list(request):
-    context = {'analysis_list': Analysis.objects.all()}
-    return render(request, 'dashboard/analysis_list.html', context)
-
-
-def analysis_form(request, id=0):
-    if request.method == 'GET':
-        if id==0:
-            form = AnalysisForm()
-        else:
-            analysis = Analysis.objects.get(pk=id)
-            form = AnalysisForm(instance=analysis)
-        return render(request, 'dashboard/analysis_form.html', {'form': form})
-    else:
-        if id == 0:
-            form = AnalysisForm(request.POST)
-        else:
-            analysis = Analysis.objects.get(pk=id)
-            form = AnalysisForm(request.POST, instance=analysis)
-        if form.is_valid():
-            form.save()
-        return redirect('/alist')
-
-def analysis_delete(request,id):
-    analysis = Analysis.objects.get(pk=id)
-    analysis.delete()
-    return redirect('/alist')
-########################## End Analyse #####################################################
 
 ########################## Collectors #####################################################
 def collectors_list(request):

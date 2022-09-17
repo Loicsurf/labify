@@ -101,16 +101,16 @@ class Doctor(models.Model):
         return str(self.first_name)
 
 
-class Analysis(models.Model):
-    additives = models.ForeignKey('Additives', on_delete=models.CASCADE)
-    collectors = models.ForeignKey('Collectors', on_delete=models.CASCADE)
-    measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
-    interval = models.ForeignKey('Interval', on_delete=models.CASCADE)
-    technique = models.ForeignKey('Technique', on_delete=models.CASCADE)
-    observation = models.TextField(max_length=255)
+# class Analysis(models.Model):
+#     additives = models.ForeignKey('Additives', on_delete=models.CASCADE)
+#     collectors = models.ForeignKey('Collectors', on_delete=models.CASCADE)
+#     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
+#     interval = models.ForeignKey('Interval', on_delete=models.CASCADE)
+#     technique = models.ForeignKey('Technique', on_delete=models.CASCADE)
+#     observation = models.TextField(max_length=255)
 
-    paillaise_choices = [('Syrologie', 'Syrologie'), ('HIV', 'HIV'), ]
-    paillaise_noms = models.CharField(choices=paillaise_choices, max_length=50) #Noms de paillaise
+#     paillaise_choices = [('Syrologie', 'Syrologie'), ('HIV', 'HIV'), ]
+#     paillaise_noms = models.CharField(choices=paillaise_choices, max_length=50) #Noms de paillaise
 
 
 class Additives(models.Model):
@@ -163,14 +163,12 @@ class Medicals(models.Model): #analyse medical
     abbr = models.CharField(max_length=50)
     description = models.TextField(max_length=255)
     technique = models.ForeignKey('Technique', on_delete=models.CASCADE)
-    unit = models.CharField(max_length=20)
+    unit_choices = [('', '')]
+    unit = models.CharField(choices=unit_choices, max_length=20)
     interval = models.ForeignKey('Interval', on_delete=models.CASCADE)
     regular_price = models.FloatField()
     assured_price = models.FloatField()
-    debit = models.ForeignKey(
-        Analysis, related_name='medicals_debit', on_delete=models.CASCADE)
     collectors = models.ForeignKey('Collectors', on_delete=models.CASCADE)
-    bench = models.ForeignKey(Analysis, on_delete=models.CASCADE) #Noms de paillaise
 
     def __str__(self):
         return str(self.analysis_name)

@@ -1,13 +1,11 @@
 from django.contrib import admin
-from .models import Prescription, Additives, Collectors, Analysis, LabTechnician, Medicals, Interval, Technique, Measurement, Doctor
+from .models import Prescription, Additives, Collectors, LabTechnician, Medicals, Interval, Technique, Measurement, Doctor
 
 admin.site.register(Prescription)
 
 admin.site.register(Additives)
 
 admin.site.register(Collectors)
-
-admin.site.register(Analysis)
 
 admin.site.register(LabTechnician)
 
