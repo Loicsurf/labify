@@ -2,10 +2,6 @@ import datetime
 from django.db import models
 
 
-class LabTechnician(models.Model):
-    pass
-
-
 class Prescription(models.Model):
     def ids():
         no = Prescription.objects.count()
@@ -33,7 +29,7 @@ class Prescription(models.Model):
             age = datetime.date.today().year - self.dob.year
             return age
 
-    gender_choices = [('M', 'Male'), ('F', 'Female'), ]
+    gender_choices = [('Male', 'Male'), ('Female', 'Female') ]
     gender = models.CharField(choices=gender_choices, max_length=50)
 
     marital_choices = [('Married', 'Married'),('Single', 'Single') ]
@@ -118,17 +114,18 @@ class Additives(models.Model):
     abbre = models.CharField(max_length=50)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.abbre)
 
 
 class Collectors(models.Model):
     name = models.CharField(max_length=50)
     color = models.CharField(max_length=50)
+    abbre = models.CharField(max_length=50)
     description = models.TextField(max_length=255)
     additives = models.ForeignKey('Additives', on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.abbre)
 
 
 class Measurement(models.Model):
@@ -136,26 +133,27 @@ class Measurement(models.Model):
     abbre = models.CharField(max_length=50)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.abbre)
 
 
 class Interval(models.Model):
     name = models.CharField(max_length=50)
-    interval_choices = [('Max', 'Maximum'), ('Min', 'Minimum')]
-    interval = models.CharField(choices=interval_choices, max_length=50)
+    interval = models.CharField(max_length=50)
+    minimum = models.IntegerField()
+    maximum = models.IntegerField()
+    fix_value = models.IntegerField()
 
     def __str__(self):
         return str(self.name)
 
 
 class Technique(models.Model):
-    name_choices = [('Observation', 'Observation'), ('Patience', 'Patience'), ]
-    name = models.CharField(choices=name_choices, max_length=50)
+    name = models.CharField(max_length=50)
     abbr = models.CharField(max_length=50)
     description = models.TextField(max_length=255)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.abbr)
 
 
 class Medicals(models.Model): #analyse medical
