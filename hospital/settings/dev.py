@@ -18,12 +18,12 @@ DATABASES = {
     }
 }
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_PORT = 587
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'loicsurf20@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Ciacia@144'
+EMAIL_BACKEND = config('APP_EMAIL_BACKEND')
+EMAIL_HOST = config('APP_EMAIL_HOST')
+EMAIL_HOST_USER = config('APP_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('APP_EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 import dj_database_url
 db_from_env = dj_database_url.config()
