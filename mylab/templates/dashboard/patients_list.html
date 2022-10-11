@@ -1,0 +1,121 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %} Prescription Sheet {% endblock %} 
+
+{% block content %}
+<div class="content-body">
+  {% include 'dashboard/messages.html' %}
+  <!-- row -->
+  <div class="container-fluid">
+    <div class="form-head align-items-center d-flex mb-sm-6 mb-3">
+      <div class="mr-auto">
+        <h2 class="text-black font-w600">Prescription Sheet</h2>
+        <p class="mb-0">Hospital Prescription Sheet</p>
+      </div>
+      <div>
+        <a href="{% url 'patients_form' %}">
+          <button type="button" class="btn btn-rounded btn-primary"><span
+            class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
+            </span>Add Patient
+          </button>
+        </a>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="table-responsive card-table">
+          <table
+            id="example5"
+            class="display dataTablesCard white-border table-responsive-xl"
+          >
+            <thead>
+              <tr>
+                <th>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="checkAll"
+                      required=""
+                    />
+                    <label class="custom-control-label" for="checkAll"></label>
+                  </div>
+                </th>
+                <th>Patient ID</th>
+                <th>Date Check In</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Doctor Assigned</th>
+                <th>Town</th>
+                <th>Gender</th>
+                <th>Status</th>
+                <th>Modify</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+          {% for object in object_list %}
+            <tbody>
+              <tr>
+                <td>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="customCheckBox2"
+                      required=""
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="customCheckBox2"
+                    ></label>
+                  </div>
+                </td>
+                <td>{{object.id}}</td>
+                <td>{{object.date_added}}</td>
+                <td>{{object.first_name}}</td>
+                <td>{{object.last_name}}</td>
+                <td>{{object.age}}Years</td>
+                <td>{{object.doctor}}</td>
+                <td>{{object.town}}</td>
+                <td>{{object.gender}}</td>
+                <td>
+                  {% if object.status == 'New Patient' %}
+                  <span class="badge badge-outline-primary">
+                    <i class="fa fa-circle text-primary mr-1"></i>
+                    {{object.status}}
+                  </span>
+                  {% elif object.status == 'In Treatement' %}
+                  <span class="badge badge-warning light">
+                    <i class="fa fa-circle text-warning mr-1"></i>
+                    {{object.status}}
+                  </span>
+                  {% elif object.status == 'Recovered' %}
+                  <span class="badge badge-info light">
+                    <i class="fa fa-circle text-info mr-1"></i>
+                    {{object.status}}
+                  </span>
+                  {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'update_patient' object.id %}" class='btn text-secondary px-0'>
+                        <i class="fa fa-pencil fa-fw"></i> Edit 
+                    </a>
+                </td>
+                <td>
+                  <form action="{% url 'patients_delete' object.id %}" method='post' class='d-inline'>
+                    {% csrf_token %}
+                    <button class="btn text-warning px-0" type="submit"><i class="fa fa-trash-o fa-fw"></i> Delete
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

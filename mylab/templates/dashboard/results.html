@@ -1,0 +1,28 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %} Patient Sheet {% endblock %} 
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<style>
+
+    .card{
+        padding: 50px 50px 50px 50px;
+        margin:100px;
+    }
+</style>
+<div class="content-body">
+    <div class="col-md">
+        <div class="card card-body">
+            <div class="text-center"> 
+            <h3>View Invoices or download directly to PDF</h3>
+            <p>Turn HTML templates into PDF's with Django + XHTML 2 PDF. This example gives you the option of  <br> view a template as a PDF or Downloading directly.</p>
+            <a class="btn btn-info"  href="{% url 'export-pdf' %}">Download Invoice</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md"></div>
+</div>
+
+{% endblock %}
