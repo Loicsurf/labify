@@ -18,7 +18,6 @@ class Prescription(models.Model):
             self.id = "{}{:02d}".format('Pat - ', self.emp_id)
         super().save(*kwargs)
 
-    CNI = models.IntegerField()
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     date_added = models.DateTimeField(auto_now_add=True)
