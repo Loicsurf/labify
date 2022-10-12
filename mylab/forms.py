@@ -16,6 +16,9 @@ class RegisterForm(UserCreationForm):
                   'laboratory_name', 'password1', 'password2']
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class PatientsForm(forms.ModelForm):
 
     class Meta:
@@ -24,6 +27,9 @@ class PatientsForm(forms.ModelForm):
         labels = {
             'first_name': 'First Name',
             'last_name': 'Last Name'
+        }
+        widgets = {
+            'dob': DateInput(),
         }
 
 
@@ -39,3 +45,8 @@ class MedicalsForm(forms.ModelForm):
     class Meta:
         model = Medicals
         fields = '__all__'
+
+class PatientSearchForm(forms.ModelForm):
+   class Meta:
+     model = Prescription
+     fields = ['first_name', 'last_name', 'town', 'status', 'doctor', 'gender']

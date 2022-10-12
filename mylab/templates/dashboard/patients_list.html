@@ -19,25 +19,25 @@
             </span>Add Patient
           </button>
         </a>
+      </div>
     </div>
-    </div>
+    <form>
+      <div class="input-group mb-3">
+        <input name="q" type="text" class="form-control input-sm" placeholder="Patient Search Box" value="{{request.GET.q}}">
+        <button class="btn btn-secondary" title="Search"><i class="fas fa-search"></i></button>
+        <a href="{% url 'patients_list' %}" class="btn btn-dark" style="margin-left: 2px;" title="Refresh"><i class="fas fa-sync-alt"></i></a>
+      </div>
+    </form>
     <div class="row">
       <div class="col-xl-12">
         <div class="table-responsive card-table">
           <table
-            id="example5"
-            class="display dataTablesCard white-border table-responsive-xl"
-          >
+            id="example5" class="display dataTablesCard white-border table-responsive-xl">
             <thead>
               <tr>
                 <th>
                   <div class="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="checkAll"
-                      required=""
-                    />
+                    <input type="checkbox" class="custom-control-input" id="checkAll" required=""/>
                     <label class="custom-control-label" for="checkAll"></label>
                   </div>
                 </th>

@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.http import Http404
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import RegisterForm, PatientsForm, CollectorsForm, MedicalsForm
 from django.contrib.auth.decorators import login_required
@@ -7,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from .models import Prescription, Collectors, Medicals, Doctor
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic.list import ListView
+from django.db.models import Q
 
 
 @login_required(login_url='/login')
@@ -38,15 +38,23 @@ def sign_up(request):
 
 ########################## PRESCRIPTION #####################################################
 class PatientsList(ListView):
-    models = Prescription
-    template_name = 'dashboard/prescription_list.html'
+    model = Prescription
+    template_name = 'dashboard/patients_list.html'
+    queryset = Prescription.objects.all()
 
     def get_queryset(self):
-        return Prescription.objects.all()
+        q = self.request.GET.get('q')
+        if q:
+            object_list = self.model.objects.filter(
+                Q(first_name__icontains=q) | Q(last_name__icontains=q) | Q(gender__icontains=q) | Q(town__icontains=q)
+            )
+        else:
+            object_list = self.model.objects.all
+        return object_list
 
 
 class PatientView(CreateView):
-    template_name = 'dashboard/prescription_form.html'
+    template_name = 'dashboard/patients_form.html'
     form_class = PatientsForm
     success_url = '/list'
     
@@ -68,7 +76,7 @@ def patient_update(request, id):
     else:
         form = PatientsForm(instance=prescription)
     
-    return render(request,'dashboard/prescription_form.html', {'form': form})
+    return render(request,'dashboard/patients_form.html', {'form': form})
     
 
 

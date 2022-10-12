@@ -1,5 +1,6 @@
 import datetime
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Prescription(models.Model):
@@ -33,8 +34,7 @@ class Prescription(models.Model):
 
     marital_choices = [('Married', 'Married'),('Single', 'Single') ]
     marital_status = models.CharField(choices = marital_choices, max_length=50)
-    telephone1 = models.IntegerField(blank=False)
-    telephone2 = models.IntegerField(blank=True, null=True)
+    phone_number = PhoneNumberField(blank=True)
     status = (
         ('In Treatement', 'In Treatement'),
         ('Recovered', 'Recovered'),
