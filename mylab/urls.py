@@ -37,4 +37,19 @@ urlpatterns = [
 
     path('reset/done/',auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
 
+    path('results',views.results, name='results'),
+    path('doctor',views.doctor, name='doctor'),
+
+    #Create URL Paths
+    path('results/create',views.createResults, name='create-results'),
+    path('results/create-build/<slug:slug>',views.createBuildResults, name='create-build-results'),
+
+    #Delete an invoice
+    path('results/delete/<slug:slug>', views.deleteResults, name='delete-results'),
+
+    #PDF and EMAIL Paths
+    path('results/view-pdf/<slug:slug>',views.viewPDFResults, name='view-pdf-results'),
+    path('results/view-document/<slug:slug>',views.viewDocumentResults, name='view-document-results'),
+    path('results/email-document/<slug:slug>',views.emailDocumentResults, name='email-document-results'),
+
 ]

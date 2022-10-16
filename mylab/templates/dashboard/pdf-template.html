@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{results.prescription.first_name}}</title>
+
+    <style >
+
+      .container {
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+
+  table {
+    caption-side: bottom;
+    border-collapse: collapse; }
+
+    th {
+      text-align: inherit;
+      text-align: -webkit-match-parent; }
+
+    thead,
+    tbody,
+    tfoot,
+    tr,
+    td,
+    th {
+      border-color: inherit;
+      border-style: solid;
+      border-width: 0; }
+
+      .table {
+        --bs-table-bg: transparent;
+        --bs-table-striped-color: #495057;
+        --bs-table-striped-bg: #f8f9fa;
+        --bs-table-active-color: #495057;
+        --bs-table-active-bg: #f8f9fa;
+        --bs-table-hover-color: #495057;
+        --bs-table-hover-bg: #f8f9fa;
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #495057;
+        vertical-align: top;
+        border-color: #eff2f7; }
+        .table > :not(caption) > * > * {
+          padding: 0.75rem 0.75rem;
+          background-color: var(--bs-table-bg);
+          background-image: -webkit-gradient(linear, right top, right bottom, from(var(--bs-table-accent-bg)), to(var(--bs-table-accent-bg)));
+          background-image: linear-gradient(var(--bs-table-accent-bg), var(--bs-table-accent-bg));
+          border-bottom-width: 0px; }
+        .table > tbody {
+          vertical-align: inherit; }
+        .table > thead {
+          vertical-align: bottom; }
+        .table > :not(:last-child) > :last-child > * {
+          border-bottom-color: #eff2f7; }
+
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; }
+
+    .d-table {
+      display: table !important; }
+      
+      tr.heading td {
+				background: #eee;
+				border-bottom: 1px solid #ddd;
+				font-weight: bold;
+			}
+
+      .table th {
+        font-weight: 600; }
+
+
+</style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <h1>Patient's ID: {{results.prescription.uniqueId}}</h1>
+      <br>
+      <hr>
+      <br>
+      <br>
+
+
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><img src="https://i.ibb.co/NtVrwK5/Picture-1-copy.png" style="width: 100%; max-width: 100px" /></td>
+              <td></td>
+              <td></td>
+              <td>
+                Results #: <strong>{{results.number}}</strong><br />
+                Created: {{results.date_created|date}}<br />
+                Due: {{results.dueDate}} <br />
+                Lab Technician: {{results.paymentTerms}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <br>
+      <br>
+      <h1>Patient's Details</h1>
+      <br>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-responsive-sm">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr class='heading'>
+                    <td>Patient's Name</td>
+                    <td>Address</td>
+                    <td>Town</td>
+                    <td>Gender</td>
+                    <td>Email Address</td>
+                    <td>Phone Number</td>
+                  </tr>
+                </thead>
+
+
+                <tbody>
+                  <tr>
+                    <td>{{results.prescription.first_name}} {{results.prescription.last_name}}</td>
+                    <td>{{results.prescription.address}}</td>
+                    <td>{{results.prescription.town}}</td>
+                    <td>{{results.prescription.gender}}</td>
+                    <td>{{results.prescription.emailAddress}}</td>
+                    <td>{{results.prescription.phone_number}}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+            <br>
+            <br>
+            <p>
+              {{results.notes}}
+            </p>
+          </table>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+  </body>
+</html>

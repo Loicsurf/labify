@@ -1,24 +1,13 @@
 import datetime
 from django.db import models
+from django.template.defaultfilters import slugify
+from uuid import uuid4
+from django.utils import timezone
+from phonenumber_field.modelfields import PhoneNumberField
+from django.urls import reverse
 
 
 class Prescription(models.Model):
-    def ids():
-        no = Prescription.objects.count()
-        if no == None:
-            return 1
-        else:
-            return no + 1
-    emp_id = models.IntegerField(('Code'), default=ids, unique=True, editable=False)
-
-
-    id = models.CharField(primary_key=True, editable=False, max_length=30)
-    def save(self, **kwargs):
-        if not self.id:
-            self.id = "{}{:02d}".format('Pat - ', self.emp_id)
-        super().save(*kwargs)
-
-    CNI = models.IntegerField()
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -34,8 +23,8 @@ class Prescription(models.Model):
 
     marital_choices = [('Married', 'Married'),('Single', 'Single') ]
     marital_status = models.CharField(choices = marital_choices, max_length=50)
-    telephone1 = models.IntegerField(blank=False)
-    telephone2 = models.IntegerField(blank=True, null=True)
+    phone_number = PhoneNumberField(blank=True)
+    emailAddress = models.CharField(null=True, blank=True, max_length=100)
     status = (
         ('In Treatement', 'In Treatement'),
         ('Recovered', 'Recovered'),
@@ -59,33 +48,37 @@ class Prescription(models.Model):
     occupation = models.CharField(
         choices=occupation_choices, max_length=50, blank=True)  # To be added in bulk
 
-    # physical_state_choices = [('', ''), ('', ''), ]
-    # physical_state = models.CharField(
-    #     choices=physical_state_choices, max_length=50, blank=True)  # To be added in bulk
+    doctor = models.ForeignKey("Doctor", blank=True, null=True, on_delete=models.CASCADE)
+    
+    uniqueId = models.CharField(null=True, blank=True, max_length=100)
+    slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    date_created = models.DateTimeField(blank=True, null=True)
+    last_updated = models.DateTimeField(blank=True, null=True)
 
-    # insurance_choices = [('', ''), ('', ''), ]
-    # insurance = models.CharField(
-    #     choices=insurance_choices, max_length=50, blank=True)  # To be added in bulk
-
-    # consulting_service_choices = [('', ''), ('', ''), ]
-    # consulting_service = models.CharField(
-    #     choices=consulting_service_choices, max_length=50, blank=True)  # To be added in bulk
-
-    # private_initial_choices = [('', ''), ('', ''), ]
-    # private_initial = models.CharField(
-    #     choices=private_initial_choices, max_length=50, blank=True)  # To be added in bulk
-    # ###############################################################################
-
-    # clinical_info = models.CharField(max_length=50, blank=True)
-    # prescribed_analyses = models.CharField(max_length=50, blank=True)
-    # physiological_state = models.CharField(max_length=50, blank=True)
-    doctor = models.ForeignKey("Doctor", on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.id)
+        return '{} {} {}'.format(self.first_name, self.town, self.uniqueId)
 
+
+    def get_absolute_url(self):
+        return reverse('prescription-detail', kwargs={'slug': self.slug})
+
+
+    def save(self, *args, **kwargs):
+        if self.date_created is None:
+            self.date_created = timezone.localtime(timezone.now())
+        if self.uniqueId is None:
+            self.uniqueId = str(uuid4()).split('-')[4]
+            self.slug = slugify('{} {} {}'.format(self.first_name, self.town, self.uniqueId))
+
+        self.slug = slugify('{} {} {}'.format(self.first_name, self.town, self.uniqueId))
+        self.last_updated = timezone.localtime(timezone.now())
+
+        super(Prescription, self).save(*args, **kwargs)
+    
     class Meta:
         ordering = ('date_added',)
+
 
 class Doctor(models.Model):
     first_name = models.CharField(max_length=50)
@@ -93,8 +86,134 @@ class Doctor(models.Model):
     gender_choices = [('M', 'Male'), ('F', 'Female'), ]
     gender = models.CharField(choices=gender_choices, max_length=50)
 
+    uniqueId = models.CharField(null=True, blank=True, max_length=100)
+    slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    date_created = models.DateTimeField(blank=True, null=True)
+    last_updated = models.DateTimeField(blank=True, null=True)
+
+
+    def __str__(self):
+        return '{} {}'.format(self.first_name, self.uniqueId)
+
+
+    def get_absolute_url(self):
+        return reverse('doctor-detail', kwargs={'slug': self.slug})
+
+
+    def save(self, *args, **kwargs):
+        if self.date_created is None:
+            self.date_created = timezone.localtime(timezone.now())
+        if self.uniqueId is None:
+            self.uniqueId = str(uuid4()).split('-')[4]
+            self.slug = slugify('{} {}'.format(self.first_name, self.uniqueId))
+
+        self.slug = slugify('{} {}'.format(self.first_name, self.uniqueId))
+        self.last_updated = timezone.localtime(timezone.now())
+
+        super(Doctor, self).save(*args, **kwargs)
+
     def __str__(self):
         return str(self.first_name)
+
+class Results(models.Model):
+    TERMS = [
+    ('Mouffo Michael', 'Mouffo Michael'),
+    ('Mandeng Grace', 'Mandeng Grace'),
+    ('Mary Jane', 'Mary Jane'),
+    ('Suh Samuel', 'Suh Samuel'),
+    ]
+
+    STATUS = [
+    ('CURRENT', 'CURRENT'),
+    ('EMAIL_SENT', 'EMAIL_SENT'),
+    ('OVERDUE', 'OVERDUE'),
+    ('PAID', 'PAID'),
+    ]
+
+    title = models.CharField(null=True, blank=True, max_length=100)
+    paymentTerms = models.CharField(choices=TERMS, max_length=100)
+    number = models.CharField(null=True, blank=True, max_length=100)
+    dueDate = models.DateField(null=True, blank=True)
+    status = models.CharField(choices=STATUS, default='CURRENT', max_length=100)
+    notes = models.TextField(null=True, blank=True)
+
+    #RELATED fields
+    prescription = models.ForeignKey(Prescription,  blank=True, null=True, on_delete=models.SET_NULL)
+    doctor = models.ForeignKey(Doctor, blank=True, null=True, on_delete=models.SET_NULL)
+
+    #Utility fields
+    uniqueId = models.CharField(null=True, blank=True, max_length=100)
+    slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    date_created = models.DateTimeField(blank=True, null=True)
+    last_updated = models.DateTimeField(blank=True, null=True)
+
+
+    def __str__(self):
+        return '{} {}'.format(self.number, self.uniqueId)
+
+
+    def get_absolute_url(self):
+        return reverse('results-detail', kwargs={'slug': self.slug})
+
+
+    def save(self, *args, **kwargs):
+        if self.date_created is None:
+            self.date_created = timezone.localtime(timezone.now())
+        if self.uniqueId is None:
+            self.uniqueId = str(uuid4()).split('-')[4]
+            self.slug = slugify('{} {}'.format(self.number, self.uniqueId))
+
+        self.slug = slugify('{} {}'.format(self.number, self.uniqueId))
+        self.last_updated = timezone.localtime(timezone.now())
+
+        super(Results, self).save(*args, **kwargs)
+
+
+class Settings(models.Model):
+
+    PROVINCES = [
+    ('Gauteng', 'Gauteng'),
+    ('Free State', 'Free State'),
+    ('Limpopo', 'Limpopo'),
+    ]
+
+    #Basic Fields
+    clientName = models.CharField(null=True, blank=True, max_length=200)
+    clientLogo = models.ImageField(default='default_logo.jpg', upload_to='company_logos')
+    addressLine1 = models.CharField(null=True, blank=True, max_length=200)
+    province = models.CharField(choices=PROVINCES, blank=True, max_length=100)
+    postalCode = models.CharField(null=True, blank=True, max_length=10)
+    phoneNumber = models.CharField(null=True, blank=True, max_length=100)
+    emailAddress = models.CharField(null=True, blank=True, max_length=100)
+    taxNumber = models.CharField(null=True, blank=True, max_length=100)
+
+
+    #Utility fields
+    uniqueId = models.CharField(null=True, blank=True, max_length=100)
+    slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    date_created = models.DateTimeField(blank=True, null=True)
+    last_updated = models.DateTimeField(blank=True, null=True)
+
+
+    def __str__(self):
+        return '{} {} {}'.format(self.clientName, self.province, self.uniqueId)
+
+
+    def get_absolute_url(self):
+        return reverse('settings-detail', kwargs={'slug': self.slug})
+
+
+    def save(self, *args, **kwargs):
+        if self.date_created is None:
+            self.date_created = timezone.localtime(timezone.now())
+        if self.uniqueId is None:
+            self.uniqueId = str(uuid4()).split('-')[4]
+            self.slug = slugify('{} {} {}'.format(self.clientName, self.province, self.uniqueId))
+
+        self.slug = slugify('{} {} {}'.format(self.clientName, self.province, self.uniqueId))
+        self.last_updated = timezone.localtime(timezone.now())
+
+        super(Settings, self).save(*args, **kwargs)
 
 
 # class Analysis(models.Model):

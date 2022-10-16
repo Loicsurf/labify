@@ -27,6 +27,9 @@
       href="{% static 'vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}"
       rel="stylesheet"
     />
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/css/dashboard.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
@@ -60,9 +63,7 @@
       ***********************************-->
       <div class="nav-header">
         <a href="index.html" class="brand-logo">
-          <img class="logo-abbr" src="{% static 'images/logo.png' %}" alt="">
-          <img class="logo-compact" src="{% static 'images/logo-text.png' %}" alt="">
-          <img class="brand-title" src="{% static 'images/logo-text.png' %}" alt="">
+          <img class="logo-abbr" src="{% static 'images/logo-full2.png' %}" alt="">
         </a>
     
         <div class="nav-control">
@@ -82,16 +83,7 @@
         <div class="header-content">
           <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
-              <div class="header-left">
-                <div class="dashboard_bar">
-                  <div class="input-group search-area d-lg-inline-flex d-none">
-                    <input type="text" class="form-control" placeholder="Search here...">
-                    <div class="input-group-append">
-                      <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <br>
               <ul class="navbar-nav header-right">
                 <li class="nav-item dropdown header-profile">
                   <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
@@ -131,7 +123,7 @@
             </li>
             <li><a href="{% url 'patients_list' %}" class="ai-icon" aria-expanded="false">
                 <i class="flaticon-381-bookmark-1"></i>
-                <span class="nav-text">Prescription</span>
+                <span class="nav-text">Patient</span>
               </a>
             </li>
             <li><a href="{% url 'collectors_list' %}" class="ai-icon" aria-expanded="false">
@@ -144,6 +136,11 @@
               <span class="nav-text">Medical Analysis</span>
             </a>
           </li>
+          <li><a href="{% url 'results' %}" class="ai-icon" aria-expanded="false">
+            <i class="fi fi-rr-treatment"></i>
+            <span class="nav-text">Results</span>
+          </a>
+        </li>
           </ul>
           <br>
           <br>
@@ -174,6 +171,10 @@
     <script src="{% static 'js/deznav-init.js' %}"></script>
     <script src="{% static 'vendor/bootstrap-datetimepicker/js/moment.js' %}"></script>
     <script src="{% static 'vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
     <!-- Chart piety plugin files -->
     <script src="{% static 'vendor/peity/jquery.peity.min.js' %}"></script>
     <!-- Apex Chart -->
