@@ -3,10 +3,9 @@ from decouple import config
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["web-production-7c3c.up.railway.app", "labisfy.com", "www.labisfy.com", 'labify.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ['https://web-production-7c3c.up.railway.app/']
 
 DATABASES = {
     'default': {
