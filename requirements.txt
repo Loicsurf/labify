@@ -13,3 +13,4 @@ python-decouple==3.6
 django-jazzmin==2.5.0
 django-phonenumber-field==7.0.0
 phonenumbers==8.12.9
+pdfkit==0.6.1
