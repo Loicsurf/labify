@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Labisfy Result</title>
+
+		<style>
+			.invoice-box {
+				max-width: 800px;
+				margin: auto;
+				padding: 30px;
+				border: 1px solid #eee;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+				font-size: 16px;
+				line-height: 24px;
+				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+				color: #555;
+			}
+
+			.invoice-box table {
+				width: 100%;
+				line-height: inherit;
+				text-align: left;
+			}
+
+			.invoice-box table td {
+				padding: 5px;
+				vertical-align: top;
+			}
+
+			.invoice-box table tr td:nth-child(2) {
+				text-align: right;
+			}
+
+			.invoice-box table tr.top table td {
+				padding-bottom: 20px;
+			}
+
+			.invoice-box table tr.top table td.title {
+				font-size: 45px;
+				line-height: 45px;
+				color: #333;
+			}
+
+			.invoice-box table tr.information table td {
+				padding-bottom: 40px;
+			}
+
+			.invoice-box table tr.heading td {
+				background: #eee;
+				border-bottom: 1px solid #ddd;
+				font-weight: bold;
+			}
+
+			.invoice-box table tr.details td {
+				padding-bottom: 20px;
+			}
+
+			.invoice-box table tr.item td {
+				border-bottom: 1px solid #eee;
+			}
+
+			.invoice-box table tr.item.last td {
+				border-bottom: none;
+			}
+
+			.invoice-box table tr.total td:nth-child(2) {
+				border-top: 2px solid #eee;
+				font-weight: bold;
+			}
+
+			@media only screen and (max-width: 600px) {
+				.invoice-box table tr.top table td {
+					width: 100%;
+					display: block;
+					text-align: center;
+				}
+
+				.invoice-box table tr.information table td {
+					width: 100%;
+					display: block;
+					text-align: center;
+				}
+			}
+
+			/** RTL **/
+			.invoice-box.rtl {
+				direction: rtl;
+				font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+			}
+
+			.invoice-box.rtl table {
+				text-align: right;
+			}
+
+			.invoice-box.rtl table tr td:nth-child(2) {
+				text-align: left;
+			}
+		</style>
+	</head>
+
+
+
+
+	<body>
+		<div class="invoice-box">
+
+
+
+			<table cellpadding="0" cellspacing="0">
+				<tr class="top">
+					<td colspan="10">
+						<table>
+
+              		<tr >
+      					<h1>Patient's ID: {{results.prescription.uniqueId}}</h1>
+      				</tr>
+
+							<tr>
+								<td class="title">
+									<img src="https://i.ibb.co/NtVrwK5/Picture-1-copy.png" style="width: 100%; max-width: 100px" />
+								</td>
+
+								<td>
+									Result #: {{results.number}}<br />
+									Created: {{results.date_created|date}}<br />
+									Due: {{results.dueDate}}<br />
+									Lab Technician: {{results.paymentTerms}}
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered table-responsive-sm">
+							<tr class="heading">
+								<td>Patient's Name</td>
+								<td>Address</td>
+								<td>Town</td>
+								<td>Gender</td>
+								<td>Email Address</td>
+								<td>Phone Number</td>
+
+							</tr>
+
+							<tr class="item">
+								<td>{{results.prescription.first_name}} {{results.prescription.last_name}}</td>
+								<td>{{results.prescription.address}}</td>
+								<td>{{results.prescription.town}}</td>
+								<td>{{results.prescription.gender}}</td>
+								<td>{{results.prescription.emailAddress}}</td>
+								<td>{{results.prescription.phone_number}}</td>
+							</tr>
+							<tr>
+								<td>
+								  <p>
+									{{results.notes}}
+								  </p>
+								</td>
+							  </tr>
+						</table>
+					</div>
+				</div>
+			</table>
+
+
+
+		</div>
+	</body>
+</html>

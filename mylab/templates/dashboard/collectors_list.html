@@ -87,6 +87,33 @@
             </tbody>
             {% endfor %}
           </table>
+          <nav>
+            {% if page.obj_has_other_pages %}
+            <ul class="pagination">
+              {% if page_obj.has_previous %}
+              <a href="?page=1" class="btn btn-outline-secondary nb-4" style="border-radius: 1px; border: 1px solid #d3d3d3;">First</a>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a></li>
+                {% else %}
+                <li class="page-item disabled"></li>
+                {% endif %}
+
+                {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == 1 %}
+                <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only"></span></span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-double-right"></i></a></li>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-secondary nb-4" style="border-radius: 1px; border: 1px solid #d3d3d3;">Last</a>
+                {% else %}
+                <li class="page-item disabled"></li>
+                {% endif %}
+            </ul>
+            {% endif %}
+          </nav>
         </div>
       </div>
     </div>
